@@ -13,11 +13,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
 
 @Service
 public class RuleLoaderService {
@@ -71,19 +69,11 @@ public class RuleLoaderService {
         }
     }
 
-    /**
-     * Get a rule by resource ID
-     */
     public Rule getRule(String resourceId) {
         return rulesCache.get(resourceId);
     }
 
-    /**
-     * Get all rules
-     */
     public List<Rule> getAllRules() {
-        return Collections.unmodifiableList(
-                rulesCache.values().stream().collect(Collectors.toList())
-        );
+        return rulesCache.values().stream().toList();
     }
 }
