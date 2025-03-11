@@ -1,7 +1,12 @@
 package com.example.ratelimiter.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.temporal.ChronoUnit;
 
+@Setter
+@Getter
 public class ApiRule extends Rule {
     private String apiPath;
     private String method;
@@ -13,19 +18,4 @@ public class ApiRule extends Rule {
         this.method = method;
     }
 
-    public String getApiPath() {
-        return apiPath;
-    }
-
-    public void setApiPath(String apiPath) {
-        this.apiPath = apiPath;
-    }
-
-    public String getMethod() {
-        return method;
-    }
-
-    public void setMethod(String method) {
-        this.method = method;
-    }
 }

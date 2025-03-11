@@ -68,7 +68,7 @@ public class RateLimiterService {
         return rateLimitResponse;
     }
 
-    public long getRemainingQuota(Rule rule, String key) {
+    private long getRemainingQuota(Rule rule, String key) {
         if (rule.getAlgorithm() == Algorithm.FIXED_WINDOW_COUNTER) {
             Long currentCount = redisRateLimitRepository.getValue(key);
             return currentCount == null ? rule.getLimit() : Math.max(0, rule.getLimit() - currentCount);

@@ -1,7 +1,12 @@
 package com.example.ratelimiter.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.temporal.ChronoUnit;
 
+@Setter
+@Getter
 public class Rule {
     private String id;
     private String resourceId;
@@ -20,51 +25,4 @@ public class Rule {
         this.timeUnit = timeUnit;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getResourceId() {
-        return resourceId;
-    }
-
-    public void setResourceId(String resourceId) {
-        this.resourceId = resourceId;
-    }
-
-    public Algorithm getAlgorithm() {
-        return algorithm;
-    }
-
-    public void setAlgorithm(Algorithm algorithm) {
-        this.algorithm = algorithm;
-    }
-
-    public long getLimit() {
-        return limit;
-    }
-
-    public void setLimit(long limit) {
-        this.limit = limit;
-    }
-
-    public long getPeriod() {
-        return period;
-    }
-
-    public void setPeriod(long period) {
-        this.period = period;
-    }
-
-    public ChronoUnit getTimeUnit() {
-        return timeUnit;
-    }
-
-    public void setTimeUnit(ChronoUnit timeUnit) {
-        this.timeUnit = timeUnit;
-    }
 }
