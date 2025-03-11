@@ -5,10 +5,13 @@ import com.example.ratelimiter.api.dto.RateLimitResponse;
 import com.example.ratelimiter.core.service.RateLimiterService;
 import com.example.ratelimiter.core.service.RuleLoaderService;
 import com.example.ratelimiter.exception.RateLimitExceededException;
+import com.example.ratelimiter.model.Rule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/rate-limit")
@@ -43,5 +46,11 @@ public class RateLimiterController {
     public ResponseEntity<String> reloadRules() {
         ruleLoaderService.loadRules();
         return ResponseEntity.ok("Rules reloaded successfully");
+    }
+
+    @GetMapping("/rules")
+    public ResponseEntity<List<Rule>> getAllRules() {
+        List<Rule> rules = ruleLoaderService.getAllRules();
+        return ResponseEntity.ok(rules);
     }
 }
