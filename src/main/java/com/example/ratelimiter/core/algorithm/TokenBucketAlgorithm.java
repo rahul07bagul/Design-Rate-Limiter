@@ -25,21 +25,18 @@ public class TokenBucketAlgorithm implements RateLimitAlgorithm {
         String tokenKey = key + ":tokens";
         String lastRefillKey = key + ":lastRefill";
 
-        // Get the current number of tokens and the last refill timestamp
         Long tokens = redisRepository.getValue(tokenKey);
         String lastRefillStr = redisRepository.getStringValue(lastRefillKey);
 
         long now = Instant.now().getEpochSecond();
         long lastRefill = lastRefillStr != null ? Long.parseLong(lastRefillStr) : 0;
 
-        // Calculate the number of tokens to refill
         long refillTime = rule.getPeriod();
         long refillAmount = rule.getLimit();
 
         // Token refill logic
         long newTokens;
         if (tokens == null) {
-            // Initialize the bucket with max tokens
             newTokens = refillAmount - 1; // Subtract 1 for the current request
             redisRepository.setValue(lastRefillKey, String.valueOf(now));
         } else {
@@ -58,10 +55,8 @@ public class TokenBucketAlgorithm implements RateLimitAlgorithm {
             return false;
         }
 
-        // Update token count
         redisRepository.setValue(tokenKey, String.valueOf(newTokens));
 
-        // Set key expiration to the rule period
         redisRepository.setExpiry(tokenKey, rule.getPeriod());
         redisRepository.setExpiry(lastRefillKey, rule.getPeriod());
 
