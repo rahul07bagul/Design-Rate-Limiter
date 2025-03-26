@@ -1,4 +1,4 @@
-# Rate Limiter
+# Design Rate Limiter
 
 A standalone rate limiter service for Java Spring Boot applications that supports multiple rate limiting algorithms and can be used as a separate service to control API request rates.
 
